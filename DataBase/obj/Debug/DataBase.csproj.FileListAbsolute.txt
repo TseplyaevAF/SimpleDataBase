@@ -1,0 +1,9 @@
+E:\прога\C#\DataBase\DataBase\bin\Debug\DataBase.exe.config
+E:\прога\C#\DataBase\DataBase\bin\Debug\DataBase.exe
+E:\прога\C#\DataBase\DataBase\bin\Debug\DataBase.pdb
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.csprojAssemblyReference.cache
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.Form1.resources
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.Properties.Resources.resources
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.csproj.GenerateResource.cache
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.exe
+E:\прога\C#\DataBase\DataBase\obj\Debug\DataBase.pdb
