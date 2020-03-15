@@ -14,14 +14,13 @@ namespace DataBase
         string songGenre; // жанр песни
         ushort songID; // id песни
 
-        public MusicFile(string artistName, string songTitle, ushort yearRelease, string songGenre)
+        public MusicFile(ushort songID, string artistName, string songTitle, ushort yearRelease, string songGenre)
         {
             this.artistName = artistName;
             this.songTitle = songTitle;
             this.yearRelease = yearRelease;
             this.songGenre = songGenre;
-            Random n = new Random();
-            songID = (ushort)n.Next(0, 1000);
+            this.songID = songID;
         }
 
         public string ArtistName
@@ -82,6 +81,16 @@ namespace DataBase
             {
                 return songID;
             }
+            set
+            {
+                songID = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return songID + " | " + artistName + " | " + songTitle + " | " +
+                yearRelease + " | " + songGenre;
         }
     }
 }

@@ -11,7 +11,8 @@ namespace DataBase
 {
     public class DataWork
     {
-        ObservableCollection<MusicFile> musicFiles = new ObservableCollection<MusicFile>();
+        //ObservableCollection<MusicFile> musicFiles = new ObservableCollection<MusicFile>();
+        ArrayList musicFiles = new ArrayList();
 
         /// <summary>
         /// Добавление песни в коллекцию
@@ -20,9 +21,10 @@ namespace DataBase
         /// <param name="songTitle"></param>
         /// <param name="yearRelease"></param>
         /// <param name="songGenre"></param>
-        public void AddMusicFile(string artistName, string songTitle, ushort yearRelease, string songGenre)
+        public void AddMusicFile(ushort id, string artistName, string songTitle, 
+            ushort yearRelease, string songGenre)
         {
-            MusicFile song = new MusicFile(artistName, songTitle, yearRelease, songGenre);
+            MusicFile song = new MusicFile(id, artistName, songTitle, yearRelease, songGenre);
             musicFiles.Add(song);
         }
 
@@ -84,7 +86,7 @@ namespace DataBase
         /// <summary>
         /// Вернуть коллекцию
         /// </summary>
-        public ObservableCollection<MusicFile> MusicFiles
+        public ArrayList MusicFiles
         {
             get
             {
