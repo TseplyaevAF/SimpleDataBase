@@ -34,7 +34,7 @@
             this.song = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxAddRecord = new System.Windows.Forms.GroupBox();
             this.btnAddRecord = new System.Windows.Forms.Button();
             this.textBoxGenre = new System.Windows.Forms.TextBox();
             this.labelGenre = new System.Windows.Forms.Label();
@@ -53,9 +53,17 @@
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.comboBoxParameters = new System.Windows.Forms.ComboBox();
+            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.labelInfoSearch = new System.Windows.Forms.Label();
+            this.ForYearAndId = new System.Windows.Forms.NumericUpDown();
+            this.textBoxForSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTable)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxAddRecord.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBoxSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ForYearAndId)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewTable
@@ -99,24 +107,24 @@
             this.genre.HeaderText = "Жанр";
             this.genre.Name = "genre";
             // 
-            // groupBox1
+            // groupBoxAddRecord
             // 
-            this.groupBox1.Controls.Add(this.btnAddRecord);
-            this.groupBox1.Controls.Add(this.textBoxGenre);
-            this.groupBox1.Controls.Add(this.labelGenre);
-            this.groupBox1.Controls.Add(this.textBoxYear);
-            this.groupBox1.Controls.Add(this.textBoxSong);
-            this.groupBox1.Controls.Add(this.labelYear);
-            this.groupBox1.Controls.Add(this.labelSong);
-            this.groupBox1.Controls.Add(this.labelArtist);
-            this.groupBox1.Controls.Add(this.textBoxArtist);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 81);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(429, 101);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Новая запись:";
+            this.groupBoxAddRecord.Controls.Add(this.btnAddRecord);
+            this.groupBoxAddRecord.Controls.Add(this.textBoxGenre);
+            this.groupBoxAddRecord.Controls.Add(this.labelGenre);
+            this.groupBoxAddRecord.Controls.Add(this.textBoxYear);
+            this.groupBoxAddRecord.Controls.Add(this.textBoxSong);
+            this.groupBoxAddRecord.Controls.Add(this.labelYear);
+            this.groupBoxAddRecord.Controls.Add(this.labelSong);
+            this.groupBoxAddRecord.Controls.Add(this.labelArtist);
+            this.groupBoxAddRecord.Controls.Add(this.textBoxArtist);
+            this.groupBoxAddRecord.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBoxAddRecord.Location = new System.Drawing.Point(12, 81);
+            this.groupBoxAddRecord.Name = "groupBoxAddRecord";
+            this.groupBoxAddRecord.Size = new System.Drawing.Size(429, 101);
+            this.groupBoxAddRecord.TabIndex = 1;
+            this.groupBoxAddRecord.TabStop = false;
+            this.groupBoxAddRecord.Text = "Новая запись:";
             // 
             // btnAddRecord
             // 
@@ -246,21 +254,21 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -268,14 +276,83 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSearch.Location = new System.Drawing.Point(135, 44);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(88, 40);
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.Text = "Найти";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // comboBoxParameters
+            // 
+            this.comboBoxParameters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxParameters.FormattingEnabled = true;
+            this.comboBoxParameters.Items.AddRange(new object[] {
+            "по id",
+            "по исполнителю",
+            "по композиции",
+            "по году выпуска",
+            "по жанру"});
+            this.comboBoxParameters.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxParameters.Name = "comboBoxParameters";
+            this.comboBoxParameters.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxParameters.TabIndex = 12;
+            this.comboBoxParameters.SelectionChangeCommitted += new System.EventHandler(this.comboBoxParameters_SelectionChangeCommitted);
+            // 
+            // groupBoxSearch
+            // 
+            this.groupBoxSearch.Controls.Add(this.labelInfoSearch);
+            this.groupBoxSearch.Controls.Add(this.ForYearAndId);
+            this.groupBoxSearch.Controls.Add(this.textBoxForSearch);
+            this.groupBoxSearch.Controls.Add(this.comboBoxParameters);
+            this.groupBoxSearch.Controls.Add(this.btnSearch);
+            this.groupBoxSearch.Location = new System.Drawing.Point(444, 81);
+            this.groupBoxSearch.Name = "groupBoxSearch";
+            this.groupBoxSearch.Size = new System.Drawing.Size(236, 101);
+            this.groupBoxSearch.TabIndex = 13;
+            this.groupBoxSearch.TabStop = false;
+            this.groupBoxSearch.Text = "Поиск:";
+            // 
+            // labelInfoSearch
+            // 
+            this.labelInfoSearch.AutoSize = true;
+            this.labelInfoSearch.Location = new System.Drawing.Point(6, 81);
+            this.labelInfoSearch.Name = "labelInfoSearch";
+            this.labelInfoSearch.Size = new System.Drawing.Size(0, 13);
+            this.labelInfoSearch.TabIndex = 14;
+            // 
+            // ForYearAndId
+            // 
+            this.ForYearAndId.Location = new System.Drawing.Point(7, 55);
+            this.ForYearAndId.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.ForYearAndId.Name = "ForYearAndId";
+            this.ForYearAndId.Size = new System.Drawing.Size(120, 20);
+            this.ForYearAndId.TabIndex = 14;
+            // 
+            // textBoxForSearch
+            // 
+            this.textBoxForSearch.Location = new System.Drawing.Point(6, 55);
+            this.textBoxForSearch.Name = "textBoxForSearch";
+            this.textBoxForSearch.Size = new System.Drawing.Size(121, 20);
+            this.textBoxForSearch.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 430);
+            this.Controls.Add(this.groupBoxSearch);
             this.Controls.Add(this.btnClearRow);
             this.Controls.Add(this.btnClearAll);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxAddRecord);
             this.Controls.Add(this.dataGridViewTable);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -284,10 +361,13 @@
             this.Name = "Form1";
             this.Text = "База данных музыки";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTable)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxAddRecord.ResumeLayout(false);
+            this.groupBoxAddRecord.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBoxSearch.ResumeLayout(false);
+            this.groupBoxSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ForYearAndId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,7 +376,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewTable;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxAddRecord;
         private System.Windows.Forms.TextBox textBoxGenre;
         private System.Windows.Forms.Label labelGenre;
         private System.Windows.Forms.TextBox textBoxYear;
@@ -320,6 +400,12 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ComboBox comboBoxParameters;
+        private System.Windows.Forms.GroupBox groupBoxSearch;
+        private System.Windows.Forms.TextBox textBoxForSearch;
+        private System.Windows.Forms.NumericUpDown ForYearAndId;
+        private System.Windows.Forms.Label labelInfoSearch;
     }
 }
 

@@ -89,8 +89,8 @@ namespace DataBase
 
         public override string ToString()
         {
-            return songID + " | " + artistName + " | " + songTitle + " | " +
-                yearRelease + " | " + songGenre;
+            return songID + "|" + artistName + "|" + songTitle + "|" +
+                yearRelease + "|" + songGenre;
         }
     }
 }
