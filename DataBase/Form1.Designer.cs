@@ -54,16 +54,14 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.comboBoxParameters = new System.Windows.Forms.ComboBox();
             this.groupBoxSearch = new System.Windows.Forms.GroupBox();
             this.labelInfoSearch = new System.Windows.Forms.Label();
-            this.ForYearAndId = new System.Windows.Forms.NumericUpDown();
             this.textBoxForSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTable)).BeginInit();
             this.groupBoxAddRecord.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBoxSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ForYearAndId)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewTable
@@ -279,36 +277,19 @@
             // btnSearch
             // 
             this.btnSearch.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSearch.Location = new System.Drawing.Point(135, 44);
+            this.btnSearch.Location = new System.Drawing.Point(153, 44);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(88, 40);
+            this.btnSearch.Size = new System.Drawing.Size(77, 40);
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Найти";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // comboBoxParameters
-            // 
-            this.comboBoxParameters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxParameters.FormattingEnabled = true;
-            this.comboBoxParameters.Items.AddRange(new object[] {
-            "по id",
-            "по исполнителю",
-            "по композиции",
-            "по году выпуска",
-            "по жанру"});
-            this.comboBoxParameters.Location = new System.Drawing.Point(6, 19);
-            this.comboBoxParameters.Name = "comboBoxParameters";
-            this.comboBoxParameters.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxParameters.TabIndex = 12;
-            this.comboBoxParameters.SelectionChangeCommitted += new System.EventHandler(this.comboBoxParameters_SelectionChangeCommitted);
-            // 
             // groupBoxSearch
             // 
+            this.groupBoxSearch.Controls.Add(this.label1);
             this.groupBoxSearch.Controls.Add(this.labelInfoSearch);
-            this.groupBoxSearch.Controls.Add(this.ForYearAndId);
             this.groupBoxSearch.Controls.Add(this.textBoxForSearch);
-            this.groupBoxSearch.Controls.Add(this.comboBoxParameters);
             this.groupBoxSearch.Controls.Add(this.btnSearch);
             this.groupBoxSearch.Location = new System.Drawing.Point(444, 81);
             this.groupBoxSearch.Name = "groupBoxSearch";
@@ -325,24 +306,21 @@
             this.labelInfoSearch.Size = new System.Drawing.Size(0, 13);
             this.labelInfoSearch.TabIndex = 14;
             // 
-            // ForYearAndId
-            // 
-            this.ForYearAndId.Location = new System.Drawing.Point(7, 55);
-            this.ForYearAndId.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.ForYearAndId.Name = "ForYearAndId";
-            this.ForYearAndId.Size = new System.Drawing.Size(120, 20);
-            this.ForYearAndId.TabIndex = 14;
-            // 
             // textBoxForSearch
             // 
             this.textBoxForSearch.Location = new System.Drawing.Point(6, 55);
             this.textBoxForSearch.Name = "textBoxForSearch";
-            this.textBoxForSearch.Size = new System.Drawing.Size(121, 20);
+            this.textBoxForSearch.Size = new System.Drawing.Size(140, 20);
             this.textBoxForSearch.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(146, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Введите фразу для поиска:";
             // 
             // Form1
             // 
@@ -367,7 +345,6 @@
             this.menuStrip1.PerformLayout();
             this.groupBoxSearch.ResumeLayout(false);
             this.groupBoxSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ForYearAndId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,11 +378,10 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.ComboBox comboBoxParameters;
         private System.Windows.Forms.GroupBox groupBoxSearch;
         private System.Windows.Forms.TextBox textBoxForSearch;
-        private System.Windows.Forms.NumericUpDown ForYearAndId;
         private System.Windows.Forms.Label labelInfoSearch;
+        private System.Windows.Forms.Label label1;
     }
 }
 

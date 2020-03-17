@@ -23,8 +23,6 @@ namespace DataBase
             dataGridViewTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-            ForYearAndId.Visible = false;
-            comboBoxParameters.Text = comboBoxParameters.Items[0].ToString();
         }
 
         // Генерация не повторяющихся id
@@ -193,79 +191,16 @@ namespace DataBase
             if (data.MusicFiles.Count == 0)
                 return;
             dataGridViewTable.ClearSelection();
-            int parameter = comboBoxParameters.SelectedIndex;
-            int ind;
-            if (parameter == 0)
+            List<int> foundElements = data.SearchMusicFile(textBoxForSearch.Text);
+            if (foundElements[0] == -1)
             {
-                ind = data.SearchById((ushort)Convert.ToInt32(ForYearAndId.Value));
-                if (ind == -1)
-                {
-                    MessageBox.Show("Элемент не найден!");
-                    return;
-                }
-                dataGridViewTable.Rows[ind].Selected = true;
-                dataGridViewTable.CurrentCell = dataGridViewTable[0, ind];
+                MessageBox.Show("Элемент не найден!");
+                return;
             }
-
-            else if (parameter == 1)
+            dataGridViewTable.CurrentCell = dataGridViewTable[0, foundElements[0]];
+            for (int i = 0; i < foundElements.Count; i++)
             {
-                ind = data.SearchByArtistName(textBoxForSearch.Text);
-                if (ind == -1)
-                {
-                    MessageBox.Show("Элемент не найден!");
-                    return;
-                }
-                dataGridViewTable.Rows[ind].Selected = true;
-                dataGridViewTable.CurrentCell = dataGridViewTable[0, ind];
-            }
-
-            else if (parameter == 2)
-            {
-                ind = data.SearchBySongTittle(textBoxForSearch.Text);
-                if (ind == -1)
-                {
-                    MessageBox.Show("Элемент не найден!");
-                    return;
-                }
-                dataGridViewTable.Rows[ind].Selected = true;
-                dataGridViewTable.CurrentCell = dataGridViewTable[0, ind];
-            }
-
-            else if (parameter == 3)
-            {
-                ind = data.SearchByYearRelease((ushort)Convert.ToInt32(ForYearAndId.Value));
-                if (ind == -1)
-                {
-                    MessageBox.Show("Элемент не найден!");
-                    return;
-                }
-                dataGridViewTable.Rows[ind].Selected = true;
-                dataGridViewTable.CurrentCell = dataGridViewTable[0, ind];
-            }
-
-            else if (parameter == 4)
-            {
-                ind = data.SearchByGenre(textBoxForSearch.Text);
-                if (ind == -1)
-                {
-                    MessageBox.Show("Элемент не найден!");
-                    return;
-                }
-                dataGridViewTable.Rows[ind].Selected = true;
-                dataGridViewTable.CurrentCell = dataGridViewTable[0, ind];
-            }
-        }
-
-        private void comboBoxParameters_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            if ((comboBoxParameters.SelectedIndex == 0) || (comboBoxParameters.SelectedIndex == 3))
-            {
-                ForYearAndId.Visible = true;
-                textBoxForSearch.Visible = false;
-            } else
-            {
-                ForYearAndId.Visible = false;
-                textBoxForSearch.Visible = true;
+                dataGridViewTable.Rows[foundElements[i]].Selected = true;
             }
         }
     }
