@@ -27,7 +27,8 @@ namespace DataBase
             panelSearchRecord.Visible = false;
             labelSave.Visible = false;
             timer.Interval = 5000;
-            pictureBoxAdd.Size = new Size(56, 48);
+            pictureBoxAdd.Size = new Size(45, 38);
+            comboBoxChoiceSort.Text = comboBoxChoiceSort.Items[0].ToString();
         }
 
         // Генерация не повторяющихся id
@@ -163,15 +164,7 @@ namespace DataBase
             this.Text = filename + " - База данных музыки";
             dataGridViewTable.Rows.Clear();
             data.OpenFile(filename);
-            for (int i = 0; i < data.MusicFiles.Count; i++)
-            {
-                MusicFile music = (MusicFile)data.MusicFiles[i];
-                dataGridViewTable.Rows.Add(music.SongID, music.ArtistName, 
-                    music.SongTitle, music.YearRelease, music.SongGenre);
-                BanChangeColumn(i);
-            }
-            // последнюю строку запрещаем редактировать
-            dataGridViewTable.Rows[data.MusicFiles.Count].ReadOnly = true;
+            WriteToDataGrid();
         }
 
         private void создатьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -232,8 +225,8 @@ namespace DataBase
             textBoxYear.Visible = false;
             btnAddRecord.Visible = false;
             panelSearchRecord.Visible = true;
-            pictureBoxAdd.Size = new Size(46, 40);
-            pictureBoxSearch.Size = new Size(56, 48);
+            pictureBoxSearch.Size = new Size(45, 38);
+            pictureBoxAdd.Size = new Size(35, 28);
         }
 
         private void pictureBoxAdd_Click(object sender, EventArgs e)
@@ -248,8 +241,17 @@ namespace DataBase
             textBoxYear.Visible = true;
             btnAddRecord.Visible = true;
             panelSearchRecord.Visible = false;
-            pictureBoxAdd.Size = new Size(56, 48);
-            pictureBoxSearch.Size = new Size(46, 40);
+            pictureBoxSearch.Size = new Size(35, 28);
+            pictureBoxAdd.Size = new Size(45, 38);
+        }
+
+        private void pictureBoxFAQ_Click(object sender, EventArgs e)
+        {
+            string Info = "База данных музыки, версия 1.0" + "\n\n" +
+                "Разработка/дизайн: Цепляев Александр" + "\n\n" +
+                "Github: https://github.com/TseplyaevAF" + "\n\n" +
+                "2020 г.";
+            MessageBox.Show(Info, "Справка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -265,6 +267,36 @@ namespace DataBase
             else if ((e.Control) && (e.KeyCode == Keys.N))
             {
                 создатьToolStripMenuItem_Click(создатьToolStripMenuItem, null);
+            }
+        }
+
+        private void WriteToDataGrid()
+        {
+            for (int i = 0; i < data.MusicFiles.Count; i++)
+            {
+                MusicFile music = (MusicFile)data.MusicFiles[i];
+                dataGridViewTable.Rows.Add(music.SongID, music.ArtistName,
+                    music.SongTitle, music.YearRelease, music.SongGenre);
+                BanChangeColumn(i);
+            }
+            // последнюю строку запрещаем редактировать
+            dataGridViewTable.Rows[data.MusicFiles.Count].ReadOnly = true;
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            if (data.MusicFiles.Count != 0)
+            {
+                dataGridViewTable.Rows.Clear();
+                if (comboBoxChoiceSort.SelectedIndex == 0)
+                {
+                    data.Sort(SortDirection.Ascending); 
+                }
+                else
+                {
+                    data.Sort(SortDirection.Descending);
+                }
+                WriteToDataGrid();
             }
         }
     }

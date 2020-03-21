@@ -167,5 +167,38 @@ namespace DataBase
                 count.Add(-1);
             return count;
         }
+
+        public void Sort(SortDirection direction)
+        {
+            musicFiles.Sort(new YearComparer(direction));
+        }
+    }
+
+    public enum SortDirection
+    {
+        Ascending,
+        Descending
+    }
+
+    public class YearComparer : IComparer
+    {
+        private SortDirection m_direction = SortDirection.Ascending;
+
+        public YearComparer() : base() { }
+
+        public YearComparer(SortDirection direction)
+        {
+            this.m_direction = direction;
+        }
+
+        int IComparer.Compare(object x, object y)
+        {
+            MusicFile music1 = (MusicFile)x;
+            MusicFile music2 = (MusicFile)y;
+
+            return (this.m_direction == SortDirection.Ascending) ?
+                music1.YearRelease.CompareTo(music2.YearRelease) :
+                music2.YearRelease.CompareTo(music1.YearRelease);
+        }
     }
 }

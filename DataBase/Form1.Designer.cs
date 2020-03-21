@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridViewTable = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.song = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClearAll = new System.Windows.Forms.Button();
             this.btnClearRow = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -65,6 +60,13 @@
             this.pictureBoxAdd = new System.Windows.Forms.PictureBox();
             this.labelSave = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.song = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSort = new System.Windows.Forms.Button();
+            this.comboBoxChoiceSort = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panelSearchRecord.SuspendLayout();
@@ -86,37 +88,12 @@
             this.year,
             this.genre});
             this.dataGridViewTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(68)))), ((int)(((byte)(96)))));
-            this.dataGridViewTable.Location = new System.Drawing.Point(12, 188);
+            this.dataGridViewTable.Location = new System.Drawing.Point(12, 228);
             this.dataGridViewTable.Name = "dataGridViewTable";
             this.dataGridViewTable.Size = new System.Drawing.Size(565, 238);
             this.dataGridViewTable.TabIndex = 0;
             this.dataGridViewTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewTable_CellBeginEdit);
             this.dataGridViewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTable_CellEndEdit);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            // 
-            // artist
-            // 
-            this.artist.HeaderText = "Исполнитель";
-            this.artist.Name = "artist";
-            // 
-            // song
-            // 
-            this.song.HeaderText = "Композиция";
-            this.song.Name = "song";
-            // 
-            // year
-            // 
-            this.year.HeaderText = "Год выпуска";
-            this.year.Name = "year";
-            // 
-            // genre
-            // 
-            this.genre.HeaderText = "Жанр";
-            this.genre.Name = "genre";
             // 
             // btnClearAll
             // 
@@ -174,21 +151,21 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -338,9 +315,9 @@
             // 
             this.pictureBoxOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxOpen.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxOpen.Image")));
-            this.pictureBoxOpen.Location = new System.Drawing.Point(12, 41);
+            this.pictureBoxOpen.Location = new System.Drawing.Point(28, 53);
             this.pictureBoxOpen.Name = "pictureBoxOpen";
-            this.pictureBoxOpen.Size = new System.Drawing.Size(46, 40);
+            this.pictureBoxOpen.Size = new System.Drawing.Size(35, 28);
             this.pictureBoxOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOpen.TabIndex = 17;
             this.pictureBoxOpen.TabStop = false;
@@ -350,9 +327,9 @@
             // 
             this.pictureBoxSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSave.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSave.Image")));
-            this.pictureBoxSave.Location = new System.Drawing.Point(85, 41);
+            this.pictureBoxSave.Location = new System.Drawing.Point(78, 53);
             this.pictureBoxSave.Name = "pictureBoxSave";
-            this.pictureBoxSave.Size = new System.Drawing.Size(46, 40);
+            this.pictureBoxSave.Size = new System.Drawing.Size(35, 28);
             this.pictureBoxSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxSave.TabIndex = 18;
             this.pictureBoxSave.TabStop = false;
@@ -362,9 +339,9 @@
             // 
             this.pictureBoxSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSearch.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSearch.Image")));
-            this.pictureBoxSearch.Location = new System.Drawing.Point(158, 41);
+            this.pictureBoxSearch.Location = new System.Drawing.Point(130, 53);
             this.pictureBoxSearch.Name = "pictureBoxSearch";
-            this.pictureBoxSearch.Size = new System.Drawing.Size(46, 40);
+            this.pictureBoxSearch.Size = new System.Drawing.Size(35, 28);
             this.pictureBoxSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxSearch.TabIndex = 19;
             this.pictureBoxSearch.TabStop = false;
@@ -374,20 +351,21 @@
             // 
             this.pictureBoxFAQ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxFAQ.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxFAQ.Image")));
-            this.pictureBoxFAQ.Location = new System.Drawing.Point(305, 41);
+            this.pictureBoxFAQ.Location = new System.Drawing.Point(238, 53);
             this.pictureBoxFAQ.Name = "pictureBoxFAQ";
-            this.pictureBoxFAQ.Size = new System.Drawing.Size(46, 40);
+            this.pictureBoxFAQ.Size = new System.Drawing.Size(35, 28);
             this.pictureBoxFAQ.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxFAQ.TabIndex = 20;
             this.pictureBoxFAQ.TabStop = false;
+            this.pictureBoxFAQ.Click += new System.EventHandler(this.pictureBoxFAQ_Click);
             // 
             // pictureBoxAdd
             // 
             this.pictureBoxAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxAdd.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxAdd.Image")));
-            this.pictureBoxAdd.Location = new System.Drawing.Point(229, 41);
+            this.pictureBoxAdd.Location = new System.Drawing.Point(185, 53);
             this.pictureBoxAdd.Name = "pictureBoxAdd";
-            this.pictureBoxAdd.Size = new System.Drawing.Size(46, 40);
+            this.pictureBoxAdd.Size = new System.Drawing.Size(35, 28);
             this.pictureBoxAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxAdd.TabIndex = 21;
             this.pictureBoxAdd.TabStop = false;
@@ -404,12 +382,73 @@
             this.labelSave.TabIndex = 22;
             this.labelSave.Text = "Сохранение...";
             // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // artist
+            // 
+            this.artist.HeaderText = "Исполнитель";
+            this.artist.Name = "artist";
+            this.artist.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // song
+            // 
+            this.song.HeaderText = "Композиция";
+            this.song.Name = "song";
+            this.song.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // year
+            // 
+            this.year.HeaderText = "Год выпуска";
+            this.year.Name = "year";
+            this.year.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // genre
+            // 
+            this.genre.HeaderText = "Жанр";
+            this.genre.Name = "genre";
+            this.genre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // btnSort
+            // 
+            this.btnSort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(68)))), ((int)(((byte)(96)))));
+            this.btnSort.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSort.FlatAppearance.BorderSize = 0;
+            this.btnSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSort.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSort.ForeColor = System.Drawing.Color.White;
+            this.btnSort.Location = new System.Drawing.Point(12, 196);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(136, 26);
+            this.btnSort.TabIndex = 23;
+            this.btnSort.Text = "Сортировать";
+            this.btnSort.UseVisualStyleBackColor = false;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // comboBoxChoiceSort
+            // 
+            this.comboBoxChoiceSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxChoiceSort.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxChoiceSort.FormattingEnabled = true;
+            this.comboBoxChoiceSort.Items.AddRange(new object[] {
+            "по возрастанию",
+            "по убыванию"});
+            this.comboBoxChoiceSort.Location = new System.Drawing.Point(158, 199);
+            this.comboBoxChoiceSort.Name = "comboBoxChoiceSort";
+            this.comboBoxChoiceSort.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxChoiceSort.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(33)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(589, 430);
+            this.ClientSize = new System.Drawing.Size(589, 471);
+            this.Controls.Add(this.comboBoxChoiceSort);
+            this.Controls.Add(this.btnSort);
             this.Controls.Add(this.labelSave);
             this.Controls.Add(this.pictureBoxAdd);
             this.Controls.Add(this.btnAddRecord);
@@ -433,8 +472,8 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(795, 469);
-            this.MinimumSize = new System.Drawing.Size(395, 469);
+            this.MaximumSize = new System.Drawing.Size(605, 510);
+            this.MinimumSize = new System.Drawing.Size(605, 510);
             this.Name = "Form1";
             this.Text = "База данных музыки";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -458,11 +497,6 @@
         private System.Windows.Forms.DataGridView dataGridViewTable;
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.Button btnClearRow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn artist;
-        private System.Windows.Forms.DataGridViewTextBoxColumn song;
-        private System.Windows.Forms.DataGridViewTextBoxColumn year;
-        private System.Windows.Forms.DataGridViewTextBoxColumn genre;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem создатьToolStripMenuItem;
@@ -490,6 +524,13 @@
         private System.Windows.Forms.PictureBox pictureBoxAdd;
         private System.Windows.Forms.Label labelSave;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn artist;
+        private System.Windows.Forms.DataGridViewTextBoxColumn song;
+        private System.Windows.Forms.DataGridViewTextBoxColumn year;
+        private System.Windows.Forms.DataGridViewTextBoxColumn genre;
+        private System.Windows.Forms.Button btnSort;
+        private System.Windows.Forms.ComboBox comboBoxChoiceSort;
     }
 }
 
