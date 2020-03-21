@@ -123,6 +123,7 @@ namespace DataBase
 
         /// <summary>
         /// Поиск по заданному параметру и возвращение индексов найденных элементов
+        /// Вернет -1, если элементы не найдены
         /// </summary>
         public List<int> SearchMusicFile(string query)
         {

@@ -16,6 +16,7 @@ namespace DataBase
         DataWork data = new DataWork();
         string oldValue = "";
         string filename = "";
+        Timer timer = new Timer();
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +24,10 @@ namespace DataBase
             dataGridViewTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            panelSearchRecord.Visible = false;
+            labelSave.Visible = false;
+            timer.Interval = 5000;
+            pictureBoxAdd.Size = new Size(56, 48);
         }
 
         // Генерация не повторяющихся id
@@ -145,6 +150,7 @@ namespace DataBase
                 filename = saveFileDialog1.FileName;
                 this.Text = filename + " - База данных музыки";
             }
+            timer.Start();
             data.SaveToFile(filename);
         }
 
@@ -188,19 +194,77 @@ namespace DataBase
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (data.MusicFiles.Count == 0)
+            if ((data.MusicFiles.Count == 0) || (textBoxForSearch.Text == ""))
                 return;
             dataGridViewTable.ClearSelection();
             List<int> foundElements = data.SearchMusicFile(textBoxForSearch.Text);
             if (foundElements[0] == -1)
             {
-                MessageBox.Show("Элемент не найден!");
+                MessageBox.Show("Ничего не удалось найти!");
                 return;
             }
             dataGridViewTable.CurrentCell = dataGridViewTable[0, foundElements[0]];
             for (int i = 0; i < foundElements.Count; i++)
             {
                 dataGridViewTable.Rows[foundElements[i]].Selected = true;
+            }
+        }
+
+        private void pictureBoxOpen_Click(object sender, EventArgs e)
+        {
+            открытьToolStripMenuItem_Click(открытьToolStripMenuItem, null);
+        }
+
+        private void pictureBoxSave_Click(object sender, EventArgs e)
+        {
+            сохранитьToolStripMenuItem_Click(сохранитьToolStripMenuItem, null);
+        }
+
+        private void pictureBoxSearch_Click(object sender, EventArgs e)
+        {
+            labelArtist.Visible = false;
+            labelSong.Visible = false;
+            labelGenre.Visible = false;
+            labelYear.Visible = false;
+            textBoxArtist.Visible = false;
+            textBoxSong.Visible = false;
+            textBoxGenre.Visible = false;
+            textBoxYear.Visible = false;
+            btnAddRecord.Visible = false;
+            panelSearchRecord.Visible = true;
+            pictureBoxAdd.Size = new Size(46, 40);
+            pictureBoxSearch.Size = new Size(56, 48);
+        }
+
+        private void pictureBoxAdd_Click(object sender, EventArgs e)
+        {
+            labelArtist.Visible = true;
+            labelSong.Visible = true;
+            labelGenre.Visible = true;
+            labelYear.Visible = true;
+            textBoxArtist.Visible = true;
+            textBoxSong.Visible = true;
+            textBoxGenre.Visible = true;
+            textBoxYear.Visible = true;
+            btnAddRecord.Visible = true;
+            panelSearchRecord.Visible = false;
+            pictureBoxAdd.Size = new Size(56, 48);
+            pictureBoxSearch.Size = new Size(46, 40);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Control) && (e.KeyCode == Keys.S))
+            {
+                сохранитьToolStripMenuItem_Click(открытьToolStripMenuItem, null);
+            }
+            else if ((e.Control) && (e.KeyCode == Keys.O))
+            {
+                открытьToolStripMenuItem_Click(открытьToolStripMenuItem, null);
+            }
+            else if ((e.Control) && (e.KeyCode == Keys.N))
+            {
+                создатьToolStripMenuItem_Click(создатьToolStripMenuItem, null);
             }
         }
     }
