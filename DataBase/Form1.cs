@@ -77,9 +77,7 @@ namespace DataBase
                 MusicFile music = (MusicFile)data.MusicFiles[n - 1];
                 dataGridViewTable.Rows.Add(music.SongID, artist, song, year, genre);
                 BanChangeColumn(n - 1);
-                // Если сохранение произошло первый раз, то запускаем 
-                // таймер для автосохранения
-                if (!timer1.Enabled)
+                if ((!timer1.Enabled) && (filename != ""))
                 {
                     timer1.Enabled = true;
                     timer1.Start();
