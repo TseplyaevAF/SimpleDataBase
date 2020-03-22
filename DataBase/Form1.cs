@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace DataBase
 {
@@ -16,7 +17,6 @@ namespace DataBase
         DataWork data = new DataWork();
         string oldValue = "";
         string filename = "";
-        Timer timer = new Timer();
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +26,21 @@ namespace DataBase
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             panelSearchRecord.Visible = false;
             labelSave.Visible = false;
-            timer.Interval = 5000;
             pictureBoxAdd.Size = new Size(45, 38);
             comboBoxChoiceSort.Text = comboBoxChoiceSort.Items[0].ToString();
+            InitializeTimers();
+        }
+
+        private void InitializeTimers()
+        {
+            // Таймер для автосохранения данных в файл раз в 1 минуту
+            timer1.Interval = 60000;
+            timer1.Tick += new EventHandler(timer1_Tick);
+
+            // Таймер для отображения надписи, свидетельствующей о сохранении файла
+            // длительностью 3 сек
+            timer2.Interval = 3000;
+            timer2.Tick += new EventHandler(timer2_Tick);
         }
 
         // Генерация не повторяющихся id
@@ -65,6 +77,13 @@ namespace DataBase
                 MusicFile music = (MusicFile)data.MusicFiles[n - 1];
                 dataGridViewTable.Rows.Add(music.SongID, artist, song, year, genre);
                 BanChangeColumn(n - 1);
+                // Если сохранение произошло первый раз, то запускаем 
+                // таймер для автосохранения
+                if (!timer1.Enabled)
+                {
+                    timer1.Enabled = true;
+                    timer1.Start();
+                }
             } catch
             {
                 MessageBox.Show("Некорректные данные!");
@@ -151,7 +170,18 @@ namespace DataBase
                 filename = saveFileDialog1.FileName;
                 this.Text = filename + " - База данных музыки";
             }
-            timer.Start();
+            // Если сохранение произошло первый раз, то запускаем 
+            // таймер для автосохранения
+            if (!timer1.Enabled)
+            {
+                timer1.Enabled = true;
+                timer1.Start();
+            }
+            // При каждом сохранении будет появляться надпись "Сохранение..."
+            labelSave.Visible = true;
+            timer2.Enabled = true;
+            timer2.Start();
+
             data.SaveToFile(filename);
         }
 
@@ -181,6 +211,10 @@ namespace DataBase
                     filename = "";
                     data.DeleteMusic();
                     dataGridViewTable.Rows.Clear();
+                    timer1.Stop();
+                    timer1.Enabled = false;
+                    timer2.Stop();
+                    timer2.Enabled = false;
                 }
             }
         }
@@ -247,7 +281,7 @@ namespace DataBase
 
         private void pictureBoxFAQ_Click(object sender, EventArgs e)
         {
-            string Info = "База данных музыки, версия 1.0" + "\n\n" +
+            string Info = "База данных музыки, версия 1.3" + "\n\n" +
                 "Разработка/дизайн: Цепляев Александр" + "\n\n" +
                 "Github: https://github.com/TseplyaevAF" + "\n\n" +
                 "2020 г.";
@@ -256,18 +290,7 @@ namespace DataBase
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.Control) && (e.KeyCode == Keys.S))
-            {
-                сохранитьToolStripMenuItem_Click(открытьToolStripMenuItem, null);
-            }
-            else if ((e.Control) && (e.KeyCode == Keys.O))
-            {
-                открытьToolStripMenuItem_Click(открытьToolStripMenuItem, null);
-            }
-            else if ((e.Control) && (e.KeyCode == Keys.N))
-            {
-                создатьToolStripMenuItem_Click(создатьToolStripMenuItem, null);
-            }
+            
         }
 
         private void WriteToDataGrid()
@@ -298,6 +321,32 @@ namespace DataBase
                 }
                 WriteToDataGrid();
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            data.SaveToFile(filename);
+            labelAutoSave.Visible = true;
+            timer2.Enabled = true;
+            timer2.Start();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (labelAutoSave.Visible)
+            {
+                labelAutoSave.Visible = false;
+            } else
+            {
+                labelSave.Visible = false;
+            }
+            timer2.Enabled = false;
+            timer2.Stop();
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBoxFAQ_Click(pictureBoxFAQ, null);
         }
     }
 }

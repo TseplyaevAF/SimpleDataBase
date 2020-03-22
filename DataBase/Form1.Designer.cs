@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridViewTable = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.song = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnClearAll = new System.Windows.Forms.Button();
             this.btnClearRow = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -60,13 +65,12 @@
             this.pictureBoxAdd = new System.Windows.Forms.PictureBox();
             this.labelSave = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.song = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSort = new System.Windows.Forms.Button();
             this.comboBoxChoiceSort = new System.Windows.Forms.ComboBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.labelAutoSave = new System.Windows.Forms.Label();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTable)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panelSearchRecord.SuspendLayout();
@@ -94,6 +98,36 @@
             this.dataGridViewTable.TabIndex = 0;
             this.dataGridViewTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewTable_CellBeginEdit);
             this.dataGridViewTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTable_CellEndEdit);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // artist
+            // 
+            this.artist.HeaderText = "Исполнитель";
+            this.artist.Name = "artist";
+            this.artist.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // song
+            // 
+            this.song.HeaderText = "Композиция";
+            this.song.Name = "song";
+            this.song.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // year
+            // 
+            this.year.HeaderText = "Год выпуска";
+            this.year.Name = "year";
+            this.year.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // genre
+            // 
+            this.genre.HeaderText = "Жанр";
+            this.genre.Name = "genre";
+            this.genre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // btnClearAll
             // 
@@ -131,7 +165,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
+            this.файлToolStripMenuItem,
+            this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(589, 24);
@@ -151,21 +186,24 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.создатьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.открытьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
@@ -374,43 +412,17 @@
             // labelSave
             // 
             this.labelSave.AutoSize = true;
-            this.labelSave.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSave.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelSave.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelSave.Location = new System.Drawing.Point(480, 33);
+            this.labelSave.Location = new System.Drawing.Point(495, 37);
             this.labelSave.Name = "labelSave";
-            this.labelSave.Size = new System.Drawing.Size(97, 20);
+            this.labelSave.Size = new System.Drawing.Size(82, 16);
             this.labelSave.TabIndex = 22;
             this.labelSave.Text = "Сохранение...";
             // 
-            // id
+            // timer1
             // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // artist
-            // 
-            this.artist.HeaderText = "Исполнитель";
-            this.artist.Name = "artist";
-            this.artist.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // song
-            // 
-            this.song.HeaderText = "Композиция";
-            this.song.Name = "song";
-            this.song.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // year
-            // 
-            this.year.HeaderText = "Год выпуска";
-            this.year.Name = "year";
-            this.year.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // genre
-            // 
-            this.genre.HeaderText = "Жанр";
-            this.genre.Name = "genre";
-            this.genre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // btnSort
             // 
@@ -441,12 +453,44 @@
             this.comboBoxChoiceSort.Size = new System.Drawing.Size(121, 24);
             this.comboBoxChoiceSort.TabIndex = 24;
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // labelAutoSave
+            // 
+            this.labelAutoSave.AutoSize = true;
+            this.labelAutoSave.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAutoSave.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelAutoSave.Location = new System.Drawing.Point(471, 37);
+            this.labelAutoSave.Name = "labelAutoSave";
+            this.labelAutoSave.Size = new System.Drawing.Size(106, 16);
+            this.labelAutoSave.TabIndex = 25;
+            this.labelAutoSave.Text = "Автосохранение...";
+            this.labelAutoSave.Visible = false;
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оПрограммеToolStripMenuItem});
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(33)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(589, 471);
+            this.Controls.Add(this.labelAutoSave);
             this.Controls.Add(this.comboBoxChoiceSort);
             this.Controls.Add(this.btnSort);
             this.Controls.Add(this.labelSave);
@@ -470,6 +514,7 @@
             this.Controls.Add(this.dataGridViewTable);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(605, 510);
@@ -531,6 +576,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn genre;
         private System.Windows.Forms.Button btnSort;
         private System.Windows.Forms.ComboBox comboBoxChoiceSort;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label labelAutoSave;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
     }
 }
 
