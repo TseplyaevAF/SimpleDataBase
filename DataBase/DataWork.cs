@@ -28,11 +28,9 @@ namespace DataBase
         /// <summary>
         /// Добавление песни в коллекцию
         /// </summary>
-        public void AddMusicFile(ushort id, string artistName, string songTitle, 
-            ushort yearRelease, string songGenre)
+        public void AddMusicFile(MusicFile musicFile)
         {
-            MusicFile song = new MusicFile(id, artistName, songTitle, yearRelease, songGenre);
-            musicFiles.Add(song);
+            musicFiles.Add(musicFile);
         }
 
         /// <summary>
@@ -69,6 +67,8 @@ namespace DataBase
         public void ChangeYearRelease(ushort year, int index)
         {
             MusicFile music = (MusicFile)MusicFiles[index];
+            if ((year < 1900) || (year > DateTime.Now.Year))
+                throw new Exception("Год выпуска не раньше 1900 и не позднее " + DateTime.Now.Year);
             music.YearRelease = year;
         }
 
@@ -116,7 +116,8 @@ namespace DataBase
                     string song = dataFromFile[2];
                     ushort year = (ushort)Convert.ToInt32(dataFromFile[3]);
                     string genre = dataFromFile[4];
-                    AddMusicFile(id, artist, song, year, genre);
+                    MusicFile musicFile = new MusicFile(id, artist, song, year, genre);
+                    AddMusicFile(musicFile);
                 }
             }
         }

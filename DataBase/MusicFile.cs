@@ -16,10 +16,14 @@ namespace DataBase
 
         public MusicFile(ushort songID, string artistName, string songTitle, ushort yearRelease, string songGenre)
         {
+            if ((artistName == "") || (songTitle == "") || (songGenre == ""))
+                throw new Exception("Все поля должны быть заполнены!");
             this.artistName = artistName;
             this.songTitle = songTitle;
-            this.yearRelease = yearRelease;
             this.songGenre = songGenre;
+            if ((yearRelease < 1900) || (yearRelease > DateTime.Now.Year))
+                throw new Exception("Год выпуска не раньше 1900 и не позднее " + DateTime.Now.Year);
+            this.yearRelease = yearRelease;
             this.songID = songID;
         }
 

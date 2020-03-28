@@ -29,6 +29,12 @@ namespace DataBase
             pictureBoxAdd.Size = new Size(45, 38);
             comboBoxChoiceSort.Text = comboBoxChoiceSort.Items[0].ToString();
             InitializeTimers();
+            ToolTip t = new ToolTip();
+            t.SetToolTip(pictureBoxOpen, "Открыть файл (Ctrl+O)");
+            t.SetToolTip(pictureBoxSave, "Сохранить файл (Ctrl+S)");
+            t.SetToolTip(pictureBoxSearch, "Поиск данных");
+            t.SetToolTip(pictureBoxAdd, "Добавить новые данные");
+            t.SetToolTip(pictureBoxFAQ, "Информация о приложении");
         }
 
         private void InitializeTimers()
@@ -72,7 +78,8 @@ namespace DataBase
                 textBoxSong.Text = "";
                 textBoxYear.Text = "";
                 textBoxGenre.Text = "";
-                data.AddMusicFile(generateID(), artist, song, year, genre);
+                MusicFile musicFile = new MusicFile(generateID(), artist, song, year, genre);
+                data.AddMusicFile(musicFile);
                 int n = data.MusicFiles.Count;
                 MusicFile music = (MusicFile)data.MusicFiles[n - 1];
                 dataGridViewTable.Rows.Add(music.SongID, artist, song, year, genre);
@@ -82,9 +89,9 @@ namespace DataBase
                     timer1.Enabled = true;
                     timer1.Start();
                 }
-            } catch
+            } catch (Exception exception)
             {
-                MessageBox.Show("Некорректные данные!");
+                MessageBox.Show($"Ошибка: {exception.Message}");
             }
         }
 
@@ -143,7 +150,14 @@ namespace DataBase
             else
             if (indColumn == 3)
             {
-                data.ChangeYearRelease((ushort)Convert.ToInt32(value), indRow);
+                try
+                {
+                    data.ChangeYearRelease((ushort)Convert.ToInt32(value), indRow);
+                } catch (Exception exception)
+                {
+                    MessageBox.Show($"Ошибка: {exception.Message}");
+                    dataGridViewTable.Rows[indRow].Cells[indColumn].Value = oldValue;
+                }
             }
             else
             if (indColumn == 4)
@@ -279,7 +293,7 @@ namespace DataBase
 
         private void pictureBoxFAQ_Click(object sender, EventArgs e)
         {
-            string Info = "База данных музыки, версия 1.3" + "\n\n" +
+            string Info = "База данных музыки, версия 1.4" + "\n\n" +
                 "Разработка/дизайн: Цепляев Александр" + "\n\n" +
                 "Github: https://github.com/TseplyaevAF" + "\n\n" +
                 "2020 г.";
